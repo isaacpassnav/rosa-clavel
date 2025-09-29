@@ -1,5 +1,4 @@
 import { Howl } from "howler";
-import gsap from "gsap";
 
 const applauseSound = new Howl({
   src: [new URL("../assets/audio/applause.mp3", import.meta.url).href],
@@ -16,9 +15,10 @@ export default class UIManager {
     this.container = container;
     this.name = name;
   }
+
   showFinalScreen() {
     this.container.innerHTML = `
-      <div class="final">
+      <div class="final no-party">
         <h2>${this.name}, ¿Te gustaría ser mi compañera para Rosa y Clavel?</h2>
         <button id="yesBtn">Yes</button>
         <button id="noBtn">No</button>
@@ -26,40 +26,48 @@ export default class UIManager {
       </div>
     `;
 
-    const yesBtn = document.getElementById("yesBtn");
-    const noBtn = document.getElementById("noBtn");
-    const result = document.getElementById("result");
+    const finalDiv = this.container.querySelector(".final");
 
-    yesBtn.addEventListener("click", () => {
+    // YES button
+    document.getElementById("yesBtn").addEventListener("click", () => {
       applauseSound.play();
 
-      result.innerHTML = `
-        <img src="/src/assets/img/rose.svg" alt="Rose" class="rose" />
-        <p>🎉 Congratulations ${this.name}! Será una noche inolvidable 💃🕺✨</p>
+      finalDiv.classList.remove("no-party");
+      finalDiv.classList.add("party");
+
+      // Solo mostramos mensaje + emoji
+      document.getElementById("result").innerHTML = `
+        <div class="celebration">
+          <span class="emoji">🥳</span>
+          <p>Congratulations ${this.name}! ¡Será una noche inolvidable! 💃🕺</p>
+        </div>
       `;
 
-      gsap.from(result.querySelector(".rose"), {
-        scale: 0,
-        rotate: -180,
-        duration: 1,
-        ease: "back.out(1.7)",
-      });
+      // Eliminar botones y pregunta
+      finalDiv.querySelector("h2").remove();
+      document.getElementById("yesBtn").remove();
+      document.getElementById("noBtn").remove();
     });
 
-    noBtn.addEventListener("click", () => {
+    // NO button
+    document.getElementById("noBtn").addEventListener("click", () => {
       booSound.play();
 
-      result.innerHTML = `
-        <img src="/src/assets/img/sad-face.svg" alt="Sad face" class="sad" />
-        <p>Oh no ${this.name}, Pipipipi Pipipipi 😢</p>
+      finalDiv.classList.remove("no-party");
+      finalDiv.classList.remove("party");
+
+      // Solo mostramos mensaje triste
+      document.getElementById("result").innerHTML = `
+        <div class="celebration">
+          <span class="emoji">😢</span>
+          <p>Oh no ${this.name}, pipipipi…</p>
+        </div>
       `;
 
-      gsap.from(result.querySelector(".sad"), {
-        y: -30,
-        opacity: 0,
-        duration: 0.6,
-        ease: "bounce.out",
-      });
+      // Eliminar botones y pregunta
+      finalDiv.querySelector("h2").remove();
+      document.getElementById("yesBtn").remove();
+      document.getElementById("noBtn").remove();
     });
   }
 }

@@ -1,4 +1,3 @@
-// src/components/Game.js
 import Balloon from "./Balloon.js";
 import LetterManager from "./LetterManager.js";
 
