@@ -12,19 +12,18 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
-  padding: 1rem;
   transition: background 0.8s ease-in-out;
 }
 h1, h2 {
   font-family: 'Dancing Script', cursive;
 }
 #app {
-  flex: 1 0 auto;         /* crece para empujar el footer hacia abajo */
+  flex: 1 0 auto;      
   display: flex;
   flex-direction: column;
-  justify-content: center; /* centra verticalmente el contenido dentro del espacio disponible */
+  justify-content: center; 
   width: 100%;
-  max-width: 500px;        /* tu valor actual */
+  max-width: 500px;        
   margin: 0 auto;
   text-align: center;
   padding: 1rem;
@@ -224,14 +223,11 @@ h1, h2 {
   50% { transform: scale(1.1); }
   100% { transform: scale(1); }
 }
-
-/* Fondo animado pulsando */
 @keyframes partyPulse {
   0% { background-size: 100%; }
   50% { background-size: 110%; }
   100% { background-size: 100%; }
 }
-
 @keyframes fadeParty {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -239,8 +235,7 @@ h1, h2 {
 footer a {
   transition: transform 0.3s, color 0.3s;
 }
-
 footer a:hover {
-  color: #ffc107 !important; /* amarillo elegante */
+  color: #ffc107 !important; 
   transform: scale(1.2);
 }
