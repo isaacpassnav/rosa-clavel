@@ -4,6 +4,7 @@ import UIManager from './components/UIManager.js';
 
 let playerName = '';
 const app = document.getElementById('app');
+document.getElementById("year").textContent = new Date().getFullYear();
 
 // Start with name input
 const intro = new IntroForm(app, (name) => {
